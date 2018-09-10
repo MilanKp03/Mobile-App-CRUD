@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2018 2:37:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.triofantastico.mobile_app.entity.Mobile" table="mobile" catalog="mobile_info" optimistic-lock="version">
+        <id name="mobileId" type="java.lang.Integer">
+            <column name="MOBILE_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="mobileModel" type="string">
+            <column name="MOBILE_MODEL" length="20" />
+        </property>
+        <property name="mobileProducer" type="string">
+            <column name="MOBILE_PRODUCER" length="20" />
+        </property>
+        <property name="mobileProcessor" type="string">
+            <column name="MOBILE_PROCESSOR" length="20" />
+        </property>
+        <property name="mobileScreen" type="string">
+            <column name="MOBILE_SCREEN" length="20" />
+        </property>
+        <property name="mobileCamera" type="string">
+            <column name="MOBILE_CAMERA" length="20" />
+        </property>
+        <property name="mobileSound" type="string">
+            <column name="MOBILE_SOUND" length="20" />
+        </property>
+        <property name="mobileMemory" type="string">
+            <column name="MOBILE_MEMORY" length="20" />
+        </property>
+        <property name="mobileOs" type="string">
+            <column name="MOBILE_OS" length="20" />
+        </property>
+        <property name="mobilePhoto" type="binary">
+            <column name="MOBILE_PHOTO" />
+        </property>
+        <property name="mobileDescription" type="string">
+            <column name="MOBILE_DESCRIPTION" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>
