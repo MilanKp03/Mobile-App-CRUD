@@ -37,6 +37,10 @@ public class MobileDAO {
         mobile.setMobileOs(mobileOs);
         mobile.setMobilePhoto(mobilePhoto);
         mobile.setMobileDescription(mobileDescription);
+        
+        String base64 = mobile.getBase64Image();
+        mobile.setBase64Image(base64);
+        
         session.save(mobile);
         transaction.commit();
 
@@ -76,9 +80,15 @@ public class MobileDAO {
 
         //Transaction transaction = session.beginTransaction();
         Mobile clt = new Mobile();
-
+        
+        
         clt = (Mobile) session.load(Mobile.class, mobileId);
-
+        
+        
+//      String base64 = clt.getBase64Image();
+//        
+//      clt.setBase64Image(base64);
+        
         session.close();
 
         return clt;

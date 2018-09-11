@@ -1,7 +1,5 @@
 package com.triofantastico.mobile_app.controller;
 
-
-
 import com.triofantastico.mobile_app.DAO.MobileDAO;
 import java.io.IOException;
 import java.text.ParseException;
@@ -13,9 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.triofantastico.mobile_app.entity.Mobile;
-
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class MobileController extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/add_mobile.jsp";
     private static String LIST_USER = "/showAll.jsp";
@@ -28,26 +30,26 @@ public class MobileController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-        String forward="";
+
+        String forward = "";
         String action = request.getParameter("action");
 
-        if (action.equalsIgnoreCase("delete")){
+        if (action.equalsIgnoreCase("delete")) {
             int mobileId = Integer.parseInt(request.getParameter("mobileId"));
             dao.deleteMobile(mobileId);
             forward = LIST_USER;
-            request.setAttribute("mobiles", dao.getAllMobiles());  
-            
-        } else if (action.equalsIgnoreCase("edit")){
+            request.setAttribute("mobiles", dao.getAllMobiles());
+
+        } else if (action.equalsIgnoreCase("edit")) {
             forward = INSERT_OR_EDIT;
             int mobileId = Integer.parseInt(request.getParameter("mobileId"));
             Mobile mobile = dao.getId(mobileId);
             request.setAttribute("mobile", mobile);
-            
-        } else if (action.equalsIgnoreCase("showAll")){
+
+        } else if (action.equalsIgnoreCase("showAll")) {
             forward = LIST_USER;
             request.setAttribute("mobiles", dao.getAllMobiles());
-            
+
         } else {
             forward = INSERT_OR_EDIT;
         }
@@ -58,6 +60,7 @@ public class MobileController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Mobile mobile = new Mobile();
         mobile.setMobileModel(request.getParameter("model"));
         mobile.setMobileProducer(request.getParameter("producer"));
@@ -69,6 +72,11 @@ public class MobileController extends HttpServlet {
         mobile.setMobileOs(request.getParameter("mobile_os"));
         mobile.setMobilePhoto(request.getParameter("photo").getBytes());
         mobile.setMobileDescription(request.getParameter("description"));
+
+        
+        String base64 = mobile.getBase64Image();
+        mobile.setBase64Image(base64);
+        
 //        try {
 //            Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
 //            user.setDob(dob);
@@ -86,22 +94,20 @@ public class MobileController extends HttpServlet {
         String mobileSound = mobile.getMobileSound();
         String mobileMemory = mobile.getMobileMemory();
         String mobileOs = mobile.getMobileOs();
-        byte [] mobilePhoto = mobile.getMobilePhoto();
+        byte[] mobilePhoto = mobile.getMobilePhoto();
         String mobileDescription = mobile.getMobileDescription();
+
+        
+        //String base64 = mobile.getBase64Image();
         
         
-       
-        
-        if(mobileid == null || mobileid.isEmpty())
-        {
-            dao.addMobileDetails(mobileModel, mobileProducer, mobileProcessor, mobileScreen, mobileCamera, mobileSound, mobileMemory, mobileOs, mobilePhoto, mobileDescription  );
-        }
-        else
-        {
+        if (mobileid == null || mobileid.isEmpty()) {
+            dao.addMobileDetails(mobileModel, mobileProducer, mobileProcessor, mobileScreen, mobileCamera, mobileSound, mobileMemory, mobileOs, mobilePhoto, mobileDescription);
+        } else {
             mobile.setMobileId(Integer.parseInt(mobileid));
             dao.updateMobile(mobile);
         }
-        
+
         RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
         request.setAttribute("mobiles", dao.getAllMobiles());
         view.forward(request, response);

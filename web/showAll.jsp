@@ -39,10 +39,10 @@
                     <td><c:out value="${mobile.mobileSound}" /></td>
                     <td><c:out value="${mobile.mobileMemory}" /></td>
                     <td><c:out value="${mobile.mobileOs}" /></td>
-                    <td><c:out value="${mobile.mobilePhoto}" /></td>
+                    <td><img src="data:image/jpeg;base64, <c:out value='${mobile.base64Image}'/>" width="90" height="90"/></td>
                     <td><c:out value="${mobile.mobileDescription}" /></td>
                     
-                    
+                    <!-- data:image/jpeg;base64, -->
                     
                     
                     <td><a href="MobileController?action=edit&mobileId=<c:out value="${mobile.mobileId}"/>">Update</a></td>

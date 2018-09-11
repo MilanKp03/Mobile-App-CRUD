@@ -38,5 +38,10 @@
         <property name="mobileDescription" type="string">
             <column name="MOBILE_DESCRIPTION" length="256" />
         </property>
+        
+        <property name="base64Image" type="text">
+            <column name="MOBILE_BASE64"  />
+        </property>
+        
     </class>
 </hibernate-mapping>

@@ -27,6 +27,7 @@ create table MOBILE
    MOBILE_OS            varchar(20),
    MOBILE_PHOTO         longblob,
    MOBILE_DESCRIPTION   varchar(256),
+   MOBILE_BASE64        text, 
    primary key (MOBILE_ID)
 );
 
