@@ -1,10 +1,6 @@
 package com.triofantastico.mobile_app.controller;
 
 import com.triofantastico.mobile_app.DAO.MobileDAO;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.triofantastico.mobile_app.entity.Mobile;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Base64;
+import java.io.IOException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 
+@MultipartConfig
 public class MobileController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -62,6 +61,7 @@ public class MobileController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Mobile mobile = new Mobile();
+
         mobile.setMobileModel(request.getParameter("model"));
         mobile.setMobileProducer(request.getParameter("producer"));
         mobile.setMobileProcessor(request.getParameter("processor"));
@@ -70,21 +70,37 @@ public class MobileController extends HttpServlet {
         mobile.setMobileSound(request.getParameter("sound"));
         mobile.setMobileMemory(request.getParameter("memory"));
         mobile.setMobileOs(request.getParameter("mobile_os"));
-        mobile.setMobilePhoto(request.getParameter("photo").getBytes());
+        //mobile.setMobilePhoto(request.getParameter("photo").getBytes());
         mobile.setMobileDescription(request.getParameter("description"));
 
-        
-        String base64 = mobile.getBase64Image();
-        mobile.setBase64Image(base64);
-        
+        Part filePart = request.getPart("photo"); // Retrieves <input type="file" name="photo">
+        ByteArrayOutputStream outputStream;
+        byte[] imageBytes;
+        String base64Image;
+
+        try (InputStream fileContent = filePart.getInputStream()) {
+            outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[10096];
+            int bytesRead = -1;
+
+            while ((bytesRead = fileContent.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+
+            imageBytes = outputStream.toByteArray();
+            base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        }
+        outputStream.close();
+
+        mobile.setMobilePhoto(imageBytes);
+        mobile.setBase64Image(base64Image);
+
 //        try {
 //            Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request.getParameter("dob"));
 //            user.setDob(dob);
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
-//        user.setEmail(request.getParameter("email"));
-
         String mobileid = request.getParameter("mobileid");
         String mobileModel = mobile.getMobileModel();
         String mobileProducer = mobile.getMobileProducer();
@@ -97,10 +113,6 @@ public class MobileController extends HttpServlet {
         byte[] mobilePhoto = mobile.getMobilePhoto();
         String mobileDescription = mobile.getMobileDescription();
 
-        
-        //String base64 = mobile.getBase64Image();
-        
-        
         if (mobileid == null || mobileid.isEmpty()) {
             dao.addMobileDetails(mobileModel, mobileProducer, mobileProcessor, mobileScreen, mobileCamera, mobileSound, mobileMemory, mobileOs, mobilePhoto, mobileDescription);
         } else {

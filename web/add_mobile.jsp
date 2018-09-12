@@ -21,30 +21,41 @@
 <body>
     <h1>Add mobile</h1>
     
+    <!-- enctype="multipart/form-data" -->
     
     
-    
-    <form method="POST" action='MobileController' name="frmAddUser">
+    <form method="POST" action='MobileController' name="frmAddUser" enctype="multipart/form-data" >
+        
         Mobile ID : <input type="text" readonly="readonly" name="mobileid"
-            value="<c:out value="${mobile.mobileId}" />" /> <br /> 
+            value="<c:out value="${mobile.mobileId}" />" /> <br />
+        
         Mobile model : <input type="text" name="model"
-            value="<c:out value="${mobile.mobileModel}" />" /> <br /> 
+            value="<c:out value="${mobile.mobileModel}" />" /> <br />
+        
         Mobile producer : <input type="text" name="producer"
-            value="<c:out value="${mobile.mobileProducer}" />" /> <br /> 
+            value="<c:out value="${mobile.mobileProducer}" />" /> <br />
+        
         Mobile processor : <input type="text" name="processor"
-            value="<c:out value="${mobile.mobileProcessor}" />" /> <br /> 
+            value="<c:out value="${mobile.mobileProcessor}" />" /> <br />
+        
         Mobile screen : <input type="text" name="screen"
             value="<c:out value="${mobile.mobileScreen}" />" /> <br />
+        
         Mobile camera : <input type="text" name="camera"
             value="<c:out value="${mobile.mobileCamera}" />" /> <br />
+        
         Mobile sound : <input type="text" name="sound"
             value="<c:out value="${mobile.mobileSound}" />" /> <br />
+        
         Mobile memory : <input type="text" name="memory"
             value="<c:out value="${mobile.mobileMemory}" />" /> <br />
+        
         Mobile OS : <input type="text" name="mobile_os"
             value="<c:out value="${mobile.mobileOs}" />" /> <br />
+        
         Mobile photo : <input type="file" name="photo"
             value="<c:out value="${mobile.mobilePhoto}" />" /> <br />
+        
         Mobile description : <input type="text" name="description"
             value="<c:out value="${mobile.mobileDescription}" />" /> <br />
         

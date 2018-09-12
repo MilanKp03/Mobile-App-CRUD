@@ -21,7 +21,9 @@ public class Mobile implements java.io.Serializable {
     private byte[] mobilePhoto;
     private String mobileDescription;
     
-    private  String base64Image;
+    
+    @Transient
+    private String base64Image;
 
     public Mobile() {
     }
