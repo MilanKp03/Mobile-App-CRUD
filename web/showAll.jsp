@@ -6,24 +6,30 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>List of Mobiles</title>
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/signin.css" rel="stylesheet"> 
     </head>
     <body>
         
-        <table border=1>
-        <thead>
+        <table border=1 class="table>
+        <thead class="thead-dark">
             <tr>
-                <th>Mobile Id</th>
-                <th>Mobile model</th>
-                <th>Mobile Producer</th>
-                <th>Mobile Processor</th>
-                <th>Mobile Screen</th>
-                <th>Mobile Camera</th>
-                <th>Mobile Sound</th>
-                <th>Mobile Memory</th>
-                <th>Mobile OS</th>
-                <th>Mobile Photo</th>
-                <th>Mobile Description</th>
+                <th scope="col">Mobile Id</th>
+                <th scope="col">Mobile model</th>
+                <th  scope="col">Mobile Producer</th>
+                <th  scope="col">Mobile Processor</th>
+                <th scope="col">Mobile Screen</th>
+                <th  scope="col">Mobile Camera</th>
+                <th  scope="col">Mobile Sound</th>
+                <th  scope="col">Mobile Memory</th>
+                <th  scope="col">Mobile OS</th>
+                <th  scope="col">Mobile Photo</th>
+                <th  scope="col">Mobile Description</th>
                 <th colspan=2>Action</th>
             </tr>
         </thead>
@@ -39,7 +45,7 @@
                     <td><c:out value="${mobile.mobileSound}" /></td>
                     <td><c:out value="${mobile.mobileMemory}" /></td>
                     <td><c:out value="${mobile.mobileOs}" /></td>
-                    <td><img src="data:image/png;base64,${mobile.base64Image}" /></td>
+                    <td><img src="data:image/png;base64,${mobile.base64Image}" width="90"  height="90"/></td>
                     <td><c:out value="${mobile.mobileDescription}" /></td>
                     
                     <!-- data:image/jpeg;base64, width="90" height="90" -->
@@ -52,7 +58,7 @@
         </tbody>
     </table>
         
-        <p><a href="MobileController?action=insert">Add Mobile</a></p>
+        <button class="btn btn-outline-primary" > <a href="MobileController?action=insert">Add Mobile</a></button>
         
        
     </body>

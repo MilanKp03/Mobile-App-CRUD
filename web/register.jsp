@@ -26,48 +26,55 @@
     <body class="text-center">
         
         
-        <form method="POST" action='UserController' name="frmAddUser">
-        User ID : <input type="text" readonly="readonly" name="userid"
-            value="<c:out value="${user.userId}" />" /> <br /> 
-        First Name : <input
-            type="text" name="userName"
+        <form class="form-signin" method="POST" action='UserController' name="frmAddUser">
+           <img class="mb-4" src="img/login_logo.png" alt="trio_fantastico" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Please Sign-Up</h1>  
+      
+        <label for="inputUsername" class="sr-only">Username : </label>
+        Username : <input
+            type="text" id="inputUsername" name="userName" name="username" class="form-control" placeholder="Email address" required autofocus
             value="<c:out value="${user.username}" />" /> <br /> 
+         <label for="inputPassword" class="sr-only">Password</label>
         Password : <input
-            type="text" name="password"
+            type="text" id="inputPassword" class="form-control" placeholder="Password" required name="password"
             value="<c:out value="${user.password}" />" /> <br /> 
-        Email : <input type="text" name="email"
+        
+        <label for="inputEmail" class="sr-only">Email address</label>
+        Email : <input type="text" id="inputEmail"  name="email" class="form-control" placeholder="Email address" required autofocus
             value="<c:out value="${user.email}" />" /> <br /> <input
             type="submit" value="Submit" />
+         <p class="mt-5 mb-3 text-muted">&copy; Trio Fantastico 2018</p>
     </form>
-        
+   
+        </body>
+</html>
+     
         
         
         
 <!--
-        <form class="form-signin" action="UserController" method="post">
-            
-            <img class="mb-4" src="img/login_logo.png" alt="trio_fantastico" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
-
-            <label for="inputUsername" class="sr-only">Username</label>
-            <input type="username"  class="form-control" placeholder="Username" name="userName" size="30" required autofocus
-                   value="<c:out value="${user.username}" />" >
-
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" size="30" required>
-
-            <label for="inputPassword" class="sr-only">Confirm password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Confirm password" name="password1" size="30" required>
-
-            <label for="inputEmail" class="sr-only">Email</label>
-            <input type="email"  id="inputEmail" class="form-control" placeholder="Email" name="email" size="30" required>
-
-
-            <button class="btn btn-lg btn-primary btn-block btn-login" type="submit">Register</button>
-            <p class="mt-5 mb-3 text-muted">&copy; Trio Fantastico 2018</p>
-        </form>
+       <body class="text-center">
+  
+ 
+  
+    <form class="form-signin">
+      <img class="mb-4" src="img/login_logo.png" alt="trio_fantastico" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block btn-login" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-muted">&copy; Trio Fantastico 2018</p>
+    </form>
+	
+	
+  </body>
 -->
 
-    </body>
-</html>
-
+   
